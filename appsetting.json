@@ -1,0 +1,49 @@
+{
+    "Hexshcool": {
+        "Host": "https://livejs-api.hexschool.io",
+        "Api_path": "lora",
+        "APi_key": "HiHwiQc6ohQ5QFDktFPoLgzWOBB2",
+        "API": {
+            "GetProductList": {
+                "method": "GET",
+                "Url": "/v1/customer/{{api_path}}/products"
+            },
+            "GetCarts": {
+                "method": "GET",
+                "Url": "/v1/customer/{{api_path}}/carts"
+            },
+            "AddCartItem": {
+                "method": "POST",
+                "Url": "/v1/customer/{{api_path}}/carts"
+            },
+            "UpdateCartItems": {
+                "method": "PATCH",
+                "Url": "/v1/customer/{{api_path}}/carts"
+            },
+            "DeleteCartItemById": {
+                "method": "DELETE",
+                "Url": "/v1/customer/{{api_path}}/carts/{{Id}}"
+            },
+            "DeleteAllCartItem": {
+                "method": "DELETE",
+                "Url": "/v1/customer/{{api_path}}/carts"
+            },
+            "GetOrderList": {
+                "method": "GET",
+                "Url": "/v1/admin/{{api_path}}/orders"
+            },
+            "UpdateOrder":{
+                "method": "POST",
+                "Url": "/v1/admin/{{api_path}}/orders"
+            },
+            "DeleteOrderItem":{
+                "method": "DELETE",
+                "Url": "/v1/admin/{{api_path}}/orders/{{Id}}"
+            },
+            "DeleteAllOrderItem": {
+                "method": "DELETE",
+                "Url": "/v1/admin/{{api_path}}/orders"
+            }
+        }
+    }
+}
