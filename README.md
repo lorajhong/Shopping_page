@@ -6,7 +6,7 @@
 
 - Front web function  
     - Product
-      - [ ] Render product list by using api
+      - [X] Render product list by using api
       - [ ] Filter product by category
     - Cart
       - [ ] Add product to cart by using api
