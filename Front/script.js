@@ -1,9 +1,17 @@
-renderProductList();
+let data = [];
+initProductList();
 
-async function renderProductList() {
-    const data = await callAPI("GetProductList", "", "");
+async function initProductList() {
+    const apiData = await callAPI("GetProductList", "", "");
+    data = apiData.products;
+    renderProductList(data);
+    let productSelect = document.querySelector('.productSelect');
+    productSelect.addEventListener('change', handleProductSelct);
+}
+
+async function renderProductList(filtereddata) {
     document.querySelector(".productWrap").innerHTML =
-        data.products.reduce((acc, curr) => {
+        filtereddata.reduce((acc, curr) => {
             acc += templateProductCard(curr.images, curr.title, curr.origin_price, curr.price)
             return acc;
         }, "")
@@ -21,6 +29,15 @@ function templateProductCard(images, title, origin_price, price) {
                 <p class="nowPrice">${'NT$' + price.toLocaleString('en-US')}</p>
             </li>
     `;
-    return template
+    return template;
 }
 
+function handleProductSelct(e) {
+    const filterValue = e.target.value;
+    if (filterValue === "全部") {
+        renderProductList(data);
+    } else {
+        const filteredData = data.filter((it) => it.category === filterValue);
+        renderProductList(filteredData);
+    }
+}
