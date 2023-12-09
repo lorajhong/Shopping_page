@@ -9,10 +9,11 @@
       - [X] Render product list by using api
       - [X] Filter product by category
     - Cart
-      - [ ] Add product to cart by using api
-      - [ ] Update product qty in cart by using api
-      - [ ] delete product item by using api
-      - [ ] delete all product items by using api
+      - [X] Render cart list by using api
+      - [X] Add product to cart by using api
+      - [X] Update product qty in cart by using api
+      - [X] delete product item by using api
+      - [X] delete all product items by using api
     - Order
       - [ ] Validate order details
       - [ ] Create order by using api

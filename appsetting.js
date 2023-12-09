@@ -8,7 +8,7 @@ const config = {
                 "Method": "get",
                 "Url": "/api/livejs/v1/customer/{{api_path}}/products"
             },
-            "GetCarts": {
+            "GetCartList": {
                 "Method": "get",
                 "Url": "/api/livejs/v1/customer/{{api_path}}/carts"
             },
@@ -16,7 +16,7 @@ const config = {
                 "Method": "post",
                 "Url": "/api/livejs/v1/customer/{{api_path}}/carts"
             },
-            "UpdateCartItems": {
+            "UpdateCartItem": {
                 "Method": "patch",
                 "Url": "/api/livejs/v1/customer/{{api_path}}/carts"
             },
@@ -69,7 +69,7 @@ async function callAPI(apiName, body, id) {
             headers: headers,
             data: body,
         });
-        //console.log(response.data)
+        console.log(response)
         return response.data;
     } catch (error) {
         throw error;
