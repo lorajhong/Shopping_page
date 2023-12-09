@@ -9,9 +9,9 @@ async function initProduct() {
     let productSelect = document.querySelector('.productSelect');
     productSelect.addEventListener('change', handleProductSelct);
     renderProductList(productData);
-    
+
 }
-function productListEvent(){
+function productListEvent() {
     let addCardBtns = document.querySelectorAll('.addCardBtn');
     addCardBtns.forEach(it => it.addEventListener('click', handleAddCardBtn));
 }
@@ -22,7 +22,7 @@ function renderProductList(filtereddata) {
             acc += templateProductCard(curr.images, curr.title, curr.origin_price, curr.price, curr.id)
             return acc;
         }, "");
-        productListEvent();
+    productListEvent();
 }
 
 function templateProductCard(images, title, origin_price, price, id) {
@@ -56,7 +56,7 @@ async function initCart() {
     renderCartList(cartData);
 }
 
-function cartListEvent(){
+function cartListEvent() {
     let deleteBtns = document.querySelectorAll('.material-icons');
     deleteBtns.forEach(btn => {
         btn.addEventListener('click', handleDeletebtnClick);
@@ -64,7 +64,7 @@ function cartListEvent(){
     let deleteAllBtns = document.querySelector('.discardAllBtn');
     deleteAllBtns.addEventListener('click', handleDeleteAllbtnClick);
 
-    
+
 }
 
 async function renderCartList(cartData) {
@@ -79,17 +79,16 @@ async function renderCartList(cartData) {
         <th width="15%">金額</th>
         <th width="15%"></th>
     </tr>`;
-    console.log(cartData);
-    if(cartData.carts.length > 0){
+    if (cartData.carts.length > 0) {
         cartList.innerHTML +=
-        cartData.carts.reduce((acc, curr) => {
-            acc += templateCartCard(curr.product.images,
-                curr.product.title, curr.product.price, curr.quantity, curr.id)
-            return acc;
-        }, "");
+            cartData.carts.reduce((acc, curr) => {
+                acc += templateCartCard(curr.product.images,
+                    curr.product.title, curr.product.price, curr.quantity, curr.id)
+                return acc;
+            }, "");
         total = cartData.finalTotal;
     }
-    
+
 
     cartList.innerHTML += `<tr>
         <td>
@@ -140,9 +139,7 @@ async function handleAddCardBtn(e) {
                 "quantity": existingCartItem.quantity + 1
             }
         }
-        console.log(e.target.id);
         cartData = await callAPI("UpdateCartItem", body, "");
-        console.log(cartData);
     } else {
         body = {
             "data": {
@@ -167,3 +164,53 @@ async function handleDeleteAllbtnClick(e) {
     cartData = await callAPI("DeleteAllCartItem", "", "");
     renderCartList(cartData);
 }
+
+/* Order request */
+let orderInfoBtn = document.querySelector(".orderInfo-btn");
+orderInfoBtn.addEventListener("click", handleOrderInfoBtn)
+async function handleOrderInfoBtn(e) {
+    e.preventDefault();
+    const name = document.querySelector("#customerName");
+    const phone = document.querySelector("#customerPhone");
+    const email = document.querySelector("#customerEmail");
+    const address = document.querySelector("#customerAddress");
+    const tradeWay = document.querySelector("#tradeWay");
+
+    //validate data
+    let inputs = [name, phone, email, address];
+    let isvalid = true;
+    
+    inputs.forEach((it) => {
+        const formGroup = it.closest(".orderInfo-formGroup");
+        if (!it.validity.valid) {
+            let label = formGroup.querySelector("label").text;
+            if(formGroup.querySelector(".orderInfo-inputWrap p") == undefined){
+                formGroup.querySelector(".orderInfo-inputWrap").innerHTML +=
+                `<p class="orderInfo-message" data-message="${label}">必填</p>`;
+            }            
+            isvalid = false;
+        } else {
+            if (formGroup.querySelector(".orderInfo-inputWrap p") != undefined) {
+                formGroup.querySelector(".orderInfo-inputWrap p").remove();
+            }
+            
+        }
+    });
+    if (isvalid) {
+        const body = {
+            "data": {
+                "user": {
+                    "name": name.value,
+                    "tel": phone.value,
+                    "email": email.value,
+                    "address": address.value,
+                    "payment": tradeWay.value
+                }
+            }
+        }
+        await callAPI("AddOrder", body, "");
+        let orderForm = document.querySelector(".orderInfo-form");
+        orderForm.reset();
+        initCart();
+    }
+};

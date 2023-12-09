@@ -15,8 +15,8 @@
       - [X] delete product item by using api
       - [X] delete all product items by using api
     - Order
-      - [ ] Validate order details
-      - [ ] Create order by using api
+      - [X] Validate order details
+      - [X] Create order by using api
 
 - Back web function
     - Order List

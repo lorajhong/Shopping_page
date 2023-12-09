@@ -28,6 +28,10 @@ const config = {
                 "Method": "delete",
                 "Url": "/api/livejs/v1/customer/{{api_path}}/carts"
             },
+            "AddOrder":{
+                "Method": "post",
+                "Url": "/api/livejs/v1/customer/{{api_path}}/orders"
+            },
             "GetOrderList": {
                 "NeedKey": true,
                 "Method": "get",
@@ -69,7 +73,7 @@ async function callAPI(apiName, body, id) {
             headers: headers,
             data: body,
         });
-        console.log(response)
+        //console.log(response.data)
         return response.data;
     } catch (error) {
         throw error;
