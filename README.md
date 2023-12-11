@@ -20,8 +20,8 @@
 
 - Back web function
     - Order List
-      - [ ] List order by using api
-      - [ ] Delete order by using api
-      - [ ] Delete all orders by using api
+      - [X] List order by using api
+      - [X] Delete order by using api
+      - [X] Delete all orders by using api
     - Chart
-      - [ ] Pie chart summarize by title
+      - [X] Pie chart summarize by title

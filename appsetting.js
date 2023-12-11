@@ -39,7 +39,7 @@ const config = {
             },
             "UpdateOrder": {
                 "NeedKey": true,
-                "Method": "post",
+                "Method": "put",
                 "Url": "/api/livejs/v1/admin/{{api_path}}/orders"
             },
             "DeleteOrderItemById": {
